@@ -1,0 +1,1188 @@
+{
+	"info": {
+		"_postman_id": "12ab3206-7965-4765-bda2-946b6578cb95",
+		"name": "Testing GitLab",
+		"description": "This collection tests the Login feature of GitLab.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Getting projects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b6d1aff-b203-42c6-ac66-a0cd65747986",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects"
+					]
+				},
+				"description": "This request returns all projects the authenticated user has access to"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting my issues",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a27fe33a-996f-49d7-8fba-849edf18907e",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/issues",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"issues"
+					]
+				},
+				"description": "This request returns all issues the authenticated user has access to"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting issues assigned to me",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ca289362-fa6f-4917-8c45-a60dea4086a5",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/issues?scope=assigned_to_me",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"issues"
+					],
+					"query": [
+						{
+							"key": "scope",
+							"value": "assigned_to_me"
+						}
+					]
+				},
+				"description": "This request returns all issues that are assigned to the authenticated user"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting my project's issues",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6b9b62a-6f0b-4f0d-8ed0-50637450623b",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues"
+					]
+				},
+				"description": "This request returns all the issues of a specific project (here project with id 13714224)"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting non existng project's issues",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25c3e5c9-0426-4a0c-9a89-d43620f18120",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '404';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/88888888/issues",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"88888888",
+						"issues"
+					]
+				},
+				"description": "This request returns the issues of a non existing project"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting specific issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86ef9fae-4763-4a4e-a464-d212fa0c729f",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/1",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"1"
+					]
+				},
+				"description": "This request returns a specific issue (here issue with id 1 under project 13714224)"
+			},
+			"response": []
+		},
+		{
+			"name": "Creating new issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad18f1c6-0861-415b-9093-506e2aa9d19c",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues?title=Issue created by Postman&iid=3",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Issue created by Postman",
+							"description": "Title of the new issue"
+						},
+						{
+							"key": "iid",
+							"value": "3",
+							"description": "ID of the new issue"
+						}
+					]
+				},
+				"description": "This request creates a new issue for a specific project"
+			},
+			"response": []
+		},
+		{
+			"name": "Updating issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "545cc0fc-bb26-4c13-b3ea-e1161adaf885",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/3?state_event=close",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"3"
+					],
+					"query": [
+						{
+							"key": "state_event",
+							"value": "close"
+						}
+					]
+				},
+				"description": "This request updates an existing issue by setting it to closed"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5eb1f0df-6f0e-4c55-a3b5-5c38ca2a63b9",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '204';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/3",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"3"
+					]
+				},
+				"description": "This request deletes an existing issue (here the issue with id 3 that is created earlier by Postman)"
+			},
+			"response": []
+		},
+		{
+			"name": "Updating non existing issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "999c4fbc-8637-4457-abb3-3edfeca2f811",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '404';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/53?description=test update",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"53"
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "test update"
+						}
+					]
+				},
+				"description": "This request updates the description of a non existing issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting non existing issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc43ceb4-10bd-4cda-a639-acea5a0e4495",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '404';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/53",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"53"
+					]
+				},
+				"description": "This request deletes a non existing issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Creating new issue to move",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad18f1c6-0861-415b-9093-506e2aa9d19c",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues?title=Issue created by Postman&iid=3",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Issue created by Postman",
+							"description": "Title of the new issue"
+						},
+						{
+							"key": "iid",
+							"value": "3",
+							"description": "ID of the new issue"
+						}
+					]
+				},
+				"description": "This request creates a new issue for a specific project, in order to move it to another project on the next step"
+			},
+			"response": []
+		},
+		{
+			"name": "Moving issue to different project",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7c6609d-eaf2-4338-8f00-b8f5dc18757b",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/3/move?to_project_id=13722383",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"3",
+						"move"
+					],
+					"query": [
+						{
+							"key": "to_project_id",
+							"value": "13722383"
+						}
+					]
+				},
+				"description": "This request moves an existing issue to a different project that the user has access to"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting moved issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7c6609d-eaf2-4338-8f00-b8f5dc18757b",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '204';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/3",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"3"
+					]
+				},
+				"description": "This request deletes an existing issue that has been moved to a different project"
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribing to already subsribed issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39d625a4-af29-4df6-b0a2-d38d22a4d06a",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '304';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/2/subscribe",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"2",
+						"subscribe"
+					]
+				},
+				"description": "This request subscribes the user to an already subscribed issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribing to issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39d625a4-af29-4df6-b0a2-d38d22a4d06a",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/5064907/issues/311/subscribe",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"5064907",
+						"issues",
+						"311",
+						"subscribe"
+					]
+				},
+				"description": "This request subscribes the user to an issue that he is not already subscribed"
+			},
+			"response": []
+		},
+		{
+			"name": "Unsubscribing from issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39d625a4-af29-4df6-b0a2-d38d22a4d06a",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/5064907/issues/311/unsubscribe",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"5064907",
+						"issues",
+						"311",
+						"unsubscribe"
+					]
+				},
+				"description": "This request unsubscribes the user from an issue that he is subscribed"
+			},
+			"response": []
+		},
+		{
+			"name": "Creating TODO on issue that already has it",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '304';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/2/todo",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"2",
+						"todo"
+					]
+				},
+				"description": "This request creates a todo for the user on an issue that it already exists"
+			},
+			"response": []
+		},
+		{
+			"name": "Creating TODO on issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/1/todo",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"1",
+						"todo"
+					]
+				},
+				"description": "This request creates a todo for the user on an issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Removing TODO by adding comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n"
+				},
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/1/notes?body=note",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"1",
+						"notes"
+					],
+					"query": [
+						{
+							"key": "body",
+							"value": "note"
+						}
+					]
+				},
+				"description": "This request creates a todo for the user on an issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Setting time estimate for an issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/2/time_estimate?duration=4h30m",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"2",
+						"time_estimate"
+					],
+					"query": [
+						{
+							"key": "duration",
+							"value": "4h30m"
+						}
+					]
+				},
+				"description": "This request sets a time estimate on an issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Resetting time estimate for an issue Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/2/reset_time_estimate",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"2",
+						"reset_time_estimate"
+					]
+				},
+				"description": "This request resets a time estimate on an issue that already has one"
+			},
+			"response": []
+		},
+		{
+			"name": "Adding spent time for an issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '201';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/2/add_spent_time?duration=2h15m",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"2",
+						"add_spent_time"
+					],
+					"query": [
+						{
+							"key": "duration",
+							"value": "2h15m"
+						}
+					]
+				},
+				"description": "This request adds spent time on an issue"
+			},
+			"response": []
+		},
+		{
+			"name": "Resetting spent time for an issue Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11622ce7-2330-40d8-ab61-68fd9d9eebf0",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"type": "text",
+						"value": "KDfV8zNsg2kznNo6qYxy"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/13714224/issues/2/reset_spent_time",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"13714224",
+						"issues",
+						"2",
+						"reset_spent_time"
+					]
+				},
+				"description": "This request resets the spent time on an issue that already has one"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting participants of an issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3b4ce1c-c332-4f54-bf3f-48c46324dd65",
+						"exec": [
+							"tests[\"Status Code is correct\"] = responseCode.code == '200';"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "PRIVATE-TOKEN",
+						"value": "KDfV8zNsg2kznNo6qYxy",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://gitlab.com/api/v4/projects/5064907/issues/311/participants",
+					"protocol": "https",
+					"host": [
+						"gitlab",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"projects",
+						"5064907",
+						"issues",
+						"311",
+						"participants"
+					]
+				},
+				"description": "This request returns the participants of an issue"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "KDfV8zNsg2kznNo6qYxy",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "911747fa-5856-4073-9eab-d21d28ad5d04",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4e111f71-1246-4e05-b3ca-191bd75a9195",
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"Response time is less than 2000ms\"] = responseTime < 2000;"
+				]
+			}
+		}
+	]
+}
